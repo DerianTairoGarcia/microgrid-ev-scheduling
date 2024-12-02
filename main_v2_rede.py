@@ -17,11 +17,11 @@ with open('dataset/cost.json') as file:
     COST = json.load(file)
 
 
-DELTA = 60 # minutes
-T_novo = []
+DELTA = 15 # minutes
+T = []
 t = datetime.strptime('00:00', "%H:%M")
 while t < datetime.strptime('23:59', "%H:%M"):
-    T_novo.append(t.strftime("%H:%M"))
+    T.append(t.strftime("%H:%M"))
     t += timedelta(minutes=DELTA)
 
 
@@ -30,13 +30,8 @@ data = {'set_of_time': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
         'set_of_lines': [['1', '2'], ['2', '3'], ['3', '4'], ['4', '5']], 
         'set_of_photovoltaic_systems': ['1'], 
         'set_of_energy_storage_systems': ['1'], 
-        # 'set_of_electric_vehicles': ['1'], 
         'set_of_thermal_generator': ['1'], 
         'set_of_outage': [], 
-        # 'set_of_scenarios': ['1', '2', '3', '4', '5', '6', '7', '8', '9'], 
-        # 'coefficient_demand_scen': [1.0, 1.0, 1.0, 0.8, 0.8, 0.8, 0.6, 0.6, 0.6], 
-        # 'coefficient_pv_scen': [1.0, 0.8, 0.6, 1.0, 0.8, 0.6, 1.0, 0.8, 0.6], 
-        # 'probability_of_scen': [0.1111111111111111, 0.1111111111111111, 0.1111111111111111, 0.1111111111111111, 0.1111111111111111, 0.1111111111111111, 0.1111111111111111, 0.1111111111111111, 0.1111111111111111], 
         'set_of_scenarios': ['1'], 
         'probability_of_scen': [1.0], 
         'coefficient_demand_scen': [1.0], 
@@ -58,7 +53,7 @@ data = {'set_of_time': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
         'nominal_voltage': 11.9, 
         'maximum_current_of_lines': [999.0, 999.0, 999.0, 999.0],#, 999.0], 
         'maximum_power_PCC': [1000.0, 0, 0, 0, 0],#, 0, 0], 
-        'variation_of_time': 1, 
+        'variation_of_time': 15, 
         'cost_of_the_energy': [0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.116, 0.167, 0.167, 0.254, 0.254, 0.254, 0.167, 0.167, 0.116, 0.116], 
         'cost_of_load_curtailment': [500.0, 500.0, 500.0, 500.0, 0],#, 500.0, 500.0], 
         'nominal_active_load_phase_a': [1, 1, 123.66666666666667, 1, 1],#, 1, 1], 
@@ -90,25 +85,10 @@ data = {'set_of_time': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
         'maximum_power_ess': [1275.0], 
         'ess_efficiency': [0.9], 
         'number_discrete_blocks_piecewise_linearization': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'], 
-        # 'location_of_ev': {'1': [], '2': [], '3': [], '4': [], '5': [], '6': ['1'], '7': []}, 
-        # 'initial_energy_of_the_ev_1': [64.8], 
-        # 'minimum_energy_capacity_ev_1': [0.0], 
-        # 'maximum_energy_capacity_ev_1': [324.0], 
-        # 'maximum_power_ev_1': [80.0], 
-        # 'ev_efficiency': [0.95], 
-        # 't_arrival_1': [1], 
-        # 't_departure_1': [7], 
-        # 'initial_energy_of_the_ev_2': [21.6], 
-        # 'minimum_energy_capacity_ev_2': [0.0], 
-        # 'maximum_energy_capacity_ev_2': [108.0], 
-        # 'maximum_power_ev_2': [11.0], 
-        # 't_arrival_2': [8], 
-        # 't_departure_2': [16]
         }
 
 ## **Sets:**
 
-T = T_novo
 N = data['set_of_nodes']
 L = [tuple(x) for x in data["set_of_lines"]]
 B = data['set_of_energy_storage_systems']
@@ -187,7 +167,7 @@ Smax = {}
 for index in range(len(data["maximum_power_PCC"])):
 	Smax[N[index]] = data["maximum_power_PCC"][index]
 
-delta_t = data["variation_of_time"]
+delta_t = data["variation_of_time"]/60
 
 cEDS = {}
 for index in range(len(data["cost_of_the_energy"])):
@@ -305,7 +285,10 @@ QDc = {}
 List_NT = []
 for i in N:
 	for t in T:
-		List_NT += [[i, t]]
+          print(f'{i} {t}')
+          List_NT += [[i, t]]
+          
+
 for (i,t) in List_NT:
 	PDa[(i,t)] = ' '
 	PDb[(i,t)] = ' '

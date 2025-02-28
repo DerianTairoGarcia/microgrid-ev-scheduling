@@ -136,7 +136,7 @@
     },    
     "16": {
         "arrival": "17:00",
-        "departure": "23:00",
+        "departure": "23:45",
         "SoCini": 0.7,
         "Emax": 40,
         "Connector": "CHAdeMO",
@@ -171,8 +171,8 @@
         "Pmaxd": 0
     },
     "20": {
-        "arrival": "20:00",
-        "departure": "23:00",
+        "arrival": "20:30",
+        "departure": "23:30",
         "SoCini": 0.4,
         "Emax": 40,
         "Connector": "CCS",

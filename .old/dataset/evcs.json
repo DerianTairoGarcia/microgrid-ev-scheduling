@@ -1,0 +1,84 @@
+{
+    "EVCS1":{
+        "NAC": 1,
+        "NDC": 1,
+        "connector":{
+            "1": {
+                "type": "CHAdeMO",
+                "Pmaxc": 50,
+                "Pmaxd": 0,
+                "current": "DC",
+                "efficiency": 0.95
+            },
+            "2": {
+                "type": "Type2",
+                "Pmaxc": 43,
+                "Pmaxd": 0,
+                "current": "AC",
+                "efficiency": 0.95
+            }
+        },
+        "phases" : ["a","b"],
+        "node": "3"
+    },
+    "EVCS2":{
+        "NAC": 1,
+        "NDC": 1,
+        "connector":{
+            "1": {
+                "type": "CCS",
+                "Pmaxc": 50,
+                "Pmaxd": 0,
+                "current": "DC",
+                "efficiency": 0.95
+            },
+            "2": {
+                "type": "Type2",
+                "Pmaxc": 43,
+                "Pmaxd": 0,
+                "current": "AC",
+                "efficiency": 0.95
+            }
+
+        },
+        "phases" : ["a","b", "c"],
+        "node": "4"
+    },
+    "EVCS3":{
+        "NAC": 1,
+        "NDC": 1,
+        "connector":{
+            "1": {
+                "type": "CCS",
+                "Pmaxc": 50,
+                "Pmaxd": 0,
+                "current": "DC",
+                "efficiency": 0.95
+            },
+            "2": {
+                "type": "Type2",
+                "Pmaxc": 43,
+                "Pmaxd": 0,
+                "current": "AC",
+                "efficiency": 0.95
+            }
+        },
+        "phases" : ["b", "c"],
+        "node": "5"
+    },
+    "EVCS4":{
+        "NAC": 1,
+        "NDC": 1,
+        "connector":{
+            "1": {
+                "type": "CHAdeMO",
+                "Pmaxc": 50,
+                "Pmaxd": 50,
+                "current": "DC",
+                "efficiency": 0.95
+            }
+        },
+        "phases" : ["a", "c"],
+        "node": "7"
+    }
+}
